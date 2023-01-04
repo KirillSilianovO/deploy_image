@@ -1,3 +1,3 @@
-FROM debian-slim:latest
+FROM debian:11.6-slim
 
 RUN echo "Hello World"
