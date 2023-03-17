@@ -1,11 +1,9 @@
-FROM debian:11.5-slim
-
-LABEL version="0.10"
-LABEL description="Deploy image"
+FROM --platform=$BUILDPLATFORM debian:11.6-slim
 
 RUN set -eux; \
     apt-get update; \
     apt-get install -y  \
+      openssh-client \
       rsync \
       curl \
       python3 \

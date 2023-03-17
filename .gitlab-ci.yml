@@ -8,5 +8,4 @@ build_image:
     - docker:dind
   script:
     - docker login -u $DOCKER_HUB_REGISTRY_USER -p $DOCKER_HUB_REGISTRY_TOKEN
-    - docker build -t kirillsilianov/deploy-image:0.10 -t kirillsilianov/deploy-image:latest .
-    - docker push kirillsilianov/deploy-image --all-tags
+    - make build
