@@ -1,17 +1,32 @@
-FROM --platform=$BUILDPLATFORM debian:11.6-slim
+ARG BUILDPLATFORM
+ARG TARGETPLATFORM
 
-RUN set -eux; \
-    apt-get update; \
-    apt-get install -y  \
+FROM --platform=${BUILDPLATFORM} ${TARGETPLATFORM}/python:3.11-alpine
+
+RUN /bin/sh -c set -eux; \
+    apk add --no-cache --no-progress  \
+      git \
       openssh-client \
-      rsync \
-      curl \
-      python3 \
-      python3-pip; \
-    python3 -m pip install ansible; \
-    python3 -m pip install paramiko; \
+      ; \
+    apk add --nocache --no-progress --virtual .build-dependencies \
+      git \
+      gcc \
+      musl-dev \
+      libffi-dev \
+      python3-dev \
+      ; \
+    pip install \
+      ansible \
+      paramiko \
+      ansible-lint \
+      molecule \
+      ansible-core; \
     ansible-galaxy collection install \
-        community.postgresql \
-        community.docker \
-        community.mysql \
-        community.network
+      community.postgresql \
+      community.docker \
+      community.mysql \
+      community.network  \
+      ; \
+    apk del .build-dependencies \
+
+WORKDIR /workdir
