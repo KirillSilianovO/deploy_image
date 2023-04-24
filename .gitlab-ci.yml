@@ -3,7 +3,7 @@ stages:
 
 build_image:
   stage: build
-  image: debian:latest-slim
+  image: debian:bookworm-slim
   services:
     - docker:dind
   script:
