@@ -7,5 +7,7 @@ build_image:
   services:
     - docker:dind
   script:
+    - echo $DOCKER_HUB_REGISTRY_USER
+    - echo $DOCKER_HUB_REGISTRY_TOKEN
     - docker login -u $DOCKER_HUB_REGISTRY_USER -p $DOCKER_HUB_REGISTRY_TOKEN
     - make build_push
