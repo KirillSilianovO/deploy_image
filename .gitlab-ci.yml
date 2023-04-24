@@ -3,11 +3,10 @@ stages:
 
 build_image:
   stage: build
-  image: debian:bookworm-slim
+  image: docker:latest
   services:
     - docker:dind
   script:
-    - echo $DOCKER_HUB_REGISTRY_USER
-    - echo $DOCKER_HUB_REGISTRY_TOKEN
+    - apk add make
     - docker login -u $DOCKER_HUB_REGISTRY_USER -p $DOCKER_HUB_REGISTRY_TOKEN
     - make build_push
