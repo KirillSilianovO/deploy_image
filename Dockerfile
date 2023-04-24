@@ -7,6 +7,7 @@ RUN /bin/sh -c set -eux; \
     apk add --no-cache --no-progress  \
       git \
       openssh-client \
+      rsync \
       ; \
     apk add --nocache --no-progress --virtual .build-dependencies \
       git \
@@ -27,6 +28,6 @@ RUN /bin/sh -c set -eux; \
       community.mysql \
       community.network  \
       ; \
-    apk del .build-dependencies \
+    apk del .build-dependencies
 
 WORKDIR /workdir

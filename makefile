@@ -1,5 +1,5 @@
 IMAGE_NAME = kirillsilianov/deploy-image
-IMAGE_VERSION = 0.16
+IMAGE_VERSION = 0.19
 
 build_amd:
 	docker buildx build \
@@ -12,8 +12,8 @@ build_amd:
 build_arm:
 	docker buildx build \
 		--platform linux/arm/v8 \
-		--build-arg TARGETPLATFORM=arm64 \
-		--build-arg BUILDPLATFORM=linux/arm/v8 \
+		--build-arg TARGETPLATFORM=arm64v8 \
+		--build-arg BUILDPLATFORM=linux/arm64v8 \
 		-t $(IMAGE_NAME):$(IMAGE_VERSION)-arm64 \
 		-t $(IMAGE_NAME):latest-arm64 --load .
 

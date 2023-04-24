@@ -8,4 +8,4 @@ build_image:
     - docker:dind
   script:
     - docker login -u $DOCKER_HUB_REGISTRY_USER -p $DOCKER_HUB_REGISTRY_TOKEN
-    - make build
+    - make build_push
