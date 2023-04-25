@@ -1,7 +1,4 @@
-ARG BUILDPLATFORM
-ARG TARGETPLATFORM
-
-FROM --platform=${BUILDPLATFORM} ${TARGETPLATFORM}/python:3.11-alpine
+FROM --platform=${BUILDPLATFORM} python:3.11-alpine
 
 RUN /bin/sh -c set -eux; \
     apk add --no-cache --no-progress  \

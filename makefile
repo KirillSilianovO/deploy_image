@@ -1,21 +1,20 @@
 IMAGE_NAME = kirillsilianov/deploy-image
-IMAGE_VERSION = 0.19
+IMAGE_VERSION = 0.20
 
 build_amd:
-	docker buildx build \
-		--platform linux/amd64 \
-		--build-arg TARGETPLATFORM=amd64 \
-		--build-arg BUILDPLATFORM=linux/amd64 \
-		-t $(IMAGE_NAME):$(IMAGE_VERSION)-amd64 \
-		-t $(IMAGE_NAME):latest-amd64 --load .
+	docker buildx build --platform linux/amd64 -t $(IMAGE_NAME):amd64-latest -t $(IMAGE_NAME):amd64-$(IMAGE_VERSION) --load .
 
 build_arm:
-	docker buildx build \
-		--platform linux/arm/v8 \
-		--build-arg TARGETPLATFORM=arm64v8 \
-		--build-arg BUILDPLATFORM=linux/arm64v8 \
-		-t $(IMAGE_NAME):$(IMAGE_VERSION)-arm64 \
-		-t $(IMAGE_NAME):latest-arm64 --load .
+	docker buildx build --platform linux/arm64/v8 -t $(IMAGE_NAME):arm64-latest -t $(IMAGE_NAME):arm64-$(IMAGE_VERSION) --load .
 
-build_push: build_amd build_arm
-	docker push $(IMAGE_NAME) --all-tags
+build: build_amd build_arm
+
+build_push_arm: build_arm
+	docker push $(IMAGE_NAME):arm64-latest
+	docker push $(IMAGE_NAME):arm64-$(IMAGE_VERSION)
+
+build_push_amd: build_amd
+	docker push $(IMAGE_NAME):amd64-latest
+	docker push $(IMAGE_NAME):amd64-$(IMAGE_VERSION)
+
+build_push: build_push_arm build_push_amd
