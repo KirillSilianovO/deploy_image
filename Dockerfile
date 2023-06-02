@@ -13,6 +13,7 @@ RUN /bin/sh -c set -eux; \
       libffi-dev \
       python3-dev \
       ; \
+    pip install --upgrade pip ; \
     pip install \
       ansible \
       paramiko \

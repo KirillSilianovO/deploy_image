@@ -1,5 +1,5 @@
 IMAGE_NAME = kirillsilianov/deploy-image
-VER = 0.20
+VER = 0.22
 
 ifeq ($(strip $(IMAGE_VERSION)),)
   VER := $(VER)
@@ -9,10 +9,18 @@ endif
 
 
 build_amd:
-	docker buildx build --platform linux/amd64 -t $(IMAGE_NAME):amd64-latest -t $(IMAGE_NAME):amd64-$(VER) --load .
+	docker buildx build \
+		--platform linux/amd64 \
+		-t $(IMAGE_NAME):amd64-latest \
+		-t $(IMAGE_NAME):amd64-$(VER) \
+		--load .
 
 build_arm:
-	docker buildx build --platform linux/arm64/v8 -t $(IMAGE_NAME):arm64-latest -t $(IMAGE_NAME):arm64-$(VER) --load .
+	docker buildx build \
+		--platform linux/arm64/v8 \
+		-t $(IMAGE_NAME):arm64-latest \
+		-t $(IMAGE_NAME):arm64-$(VER) \
+		--load .
 
 build: build_amd build_arm
 
