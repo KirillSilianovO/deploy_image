@@ -1,4 +1,6 @@
-FROM --platform=${BUILDPLATFORM} python:3.11-alpine
+FROM --platform=${BUILDPLATFORM} python:3.11-alpine3.18
+
+WORKDIR /workdir
 
 RUN /bin/sh -c set -eux; \
     apk add --no-cache --no-progress  \
@@ -13,13 +15,9 @@ RUN /bin/sh -c set -eux; \
       libffi-dev \
       python3-dev \
       ; \
-    pip install --upgrade pip ; \
-    pip install \
-      ansible \
-      paramiko \
-      ansible-lint \
-      molecule \
-      ansible-core; \
+    pip install --upgrade pip
+COPY requirements.txt /workdir/
+RUN pip install -r ./requirements.txt ;\
     ansible-galaxy collection install \
       community.postgresql \
       community.docker \

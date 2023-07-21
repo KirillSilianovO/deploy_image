@@ -1,5 +1,5 @@
-IMAGE_NAME = kirillsilianov/deploy-image
-VER = 0.22
+IMAGE_NAME = registry.ksilianov.xyz/meta/deploy_image
+VER = 1.2
 
 ifeq ($(strip $(IMAGE_VERSION)),)
   VER := $(VER)
