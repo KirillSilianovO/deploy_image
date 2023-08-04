@@ -13,7 +13,7 @@ build_image:
     - apk add make
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - make build_push
+    - make build_push_global
   only:
     - tags
   except:
