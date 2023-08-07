@@ -2,7 +2,7 @@ include env
 export
 
 GLOBAL_IMAGE_NAME = kirillsilianov/deploy-image
-LOCAL_IMAGE_NAME = registry.ksilianov.xyz/meta/deploy_image
+LOCAL_IMAGE_NAME = harbor.ksilianov.xyz/main/deploy_image
 
 BUILDER_NAME = deploy-builder
 
@@ -18,7 +18,8 @@ builder_create:
 builder_delete:
 	docker buildx rm $(BUILDER_NAME)
 
-build_push_global: builder_create
+build_push_global:
+	$(MAKE) builder_create
 	docker buildx build \
 		--platform linux/amd64,linux/arm64/v8 \
 		-f Dockerfile \
@@ -27,7 +28,8 @@ build_push_global: builder_create
 		--push . || true
 	$(MAKE) builder_delete
 
-build_push_local: builder_create
+build_push_local:
+	$(MAKE) builder_create
 	docker buildx build \
 		--platform linux/amd64,linux/arm64/v8 \
 		-f Dockerfile \
@@ -36,7 +38,8 @@ build_push_local: builder_create
 		--push . || true
 	$(MAKE) builder_delete
 
-build_load_local: builder_create
+build_load_local:
+	$(MAKE) builder_create
 	docker buildx build \
 		-f Dockerfile \
 		-t $(LOCAL_IMAGE_NAME):latest \

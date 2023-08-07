@@ -12,6 +12,7 @@ build_image:
   before_script:
     - apk add make
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker login -u $HARBOR_USERNAME -p $HARBOR_PASSWORD $HARBOR_HOST
   script:
     - make build_push_global
   only:
