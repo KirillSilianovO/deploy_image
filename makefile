@@ -48,3 +48,9 @@ build_load_local:
 	$(MAKE) builder_delete
 
 build_push: build_push_local build_push_global
+
+freeze:
+	docker run \
+		--rm \
+		-it \
+		$(LOCAL_IMAGE_NAME):latest pip freeze > requirements.txt
