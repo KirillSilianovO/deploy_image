@@ -7,9 +7,9 @@ RUN /bin/sh -c set -eux; \
       git \
       openssh-client \
       rsync \
+      sshpass \
       ; \
     apk add --nocache --no-progress --virtual .build-dependencies \
-      git \
       gcc \
       musl-dev \
       libffi-dev \
