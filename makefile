@@ -47,10 +47,13 @@ build_load_local:
 		--load . || true
 	$(MAKE) builder_delete
 
-build_push: build_push_local build_push_global
+build_load_global:
+	$(MAKE) builder_create
+	docker buildx build \
+		-f Dockerfile \
+		-t $(GLOBAL_IMAGE_NAME):latest \
+		-t $(GLOBAL_IMAGE_NAME):$(VER) \
+		--load . || true
+	$(MAKE) builder_delete
 
-freeze:
-	docker run \
-		--rm \
-		-it \
-		$(LOCAL_IMAGE_NAME):latest pip freeze > requirements.txt
+build_push: build_push_local build_push_global
