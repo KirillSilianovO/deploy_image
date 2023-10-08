@@ -1,8 +1,10 @@
-FROM --platform=${BUILDPLATFORM} python:3.11-alpine3.18
+FROM --platform=${BUILDPLATFORM} python:3.12-alpine3.18
 
 WORKDIR /workdir
 
 RUN /bin/sh -c set -eux; \
+    apk update ;\
+    apk upgrade ; \
     apk add --no-cache --no-progress  \
       git \
       openssh-client \
