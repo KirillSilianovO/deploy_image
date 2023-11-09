@@ -1,0 +1,20 @@
+name: Image build flow
+run-name: ${{ github.actor }} is learning GitHub Actions
+on:
+  - push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: catthehacker/ubuntu:act-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Login local registry
+        uses: docker/login-action@v3
+        with:
+          registry: harbor.ksilianov.xyz
+          username: 'admin'
+          password: 'KvvL7nGpe8ibPu8iCw8M'
+      - name: Build push local
+        run: make build_load_local
