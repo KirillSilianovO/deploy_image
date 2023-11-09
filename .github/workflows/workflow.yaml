@@ -15,6 +15,6 @@ jobs:
         with:
           registry: harbor.ksilianov.xyz
           username: 'admin'
-          password: 'KvvL7nGpe8ibPu8iCw8M'
+          password: '${{ secrets.LOCAL_CONTAINER_REGISTRY_PASSWORD }}
       - name: Build push local
         run: make build_load_local
