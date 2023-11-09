@@ -1,6 +1,9 @@
 name: Image build flow
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: [ push ]
+on:
+  push:
+    tags:
+      - '**'
 jobs:
   test:
     runs-on: ubuntu-latest
