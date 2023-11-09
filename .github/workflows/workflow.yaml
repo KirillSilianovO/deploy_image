@@ -18,7 +18,6 @@ jobs:
       - name: Login dockerhub
         uses: docker/login-action@v3
         with:
-          username: 'kirillsilianov'
           password: ${{ secrets.GLOBAL_CONTAINER_REGISTRY_PASSWORD }}
       - name: Build push local
         run: make build_load_local
