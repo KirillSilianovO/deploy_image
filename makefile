@@ -19,6 +19,7 @@ builder_recreate:
 
 build_push_global: builder_recreate
 	docker buildx build \
+		--no-cache \
 		--platform linux/amd64,linux/arm64/v8 \
 		-f Dockerfile \
 		-t $(GLOBAL_IMAGE_NAME):latest \
@@ -27,6 +28,7 @@ build_push_global: builder_recreate
 
 build_push_local: builder_recreate
 	docker buildx build \
+		--no-cache \
 		--platform linux/amd64,linux/arm64/v8 \
 		-f Dockerfile \
 		-t $(LOCAL_IMAGE_NAME):latest \
@@ -35,6 +37,7 @@ build_push_local: builder_recreate
 
 build_load_local: builder_recreate
 	docker buildx build \
+		--no-cache \
 		-f Dockerfile \
 		-t $(LOCAL_IMAGE_NAME):latest \
 		-t $(LOCAL_IMAGE_NAME):$(VER) \
@@ -42,6 +45,7 @@ build_load_local: builder_recreate
 
 build_load_global: builder_recreate
 	docker buildx build \
+		--no-cache \
 		-f Dockerfile \
 		-t $(GLOBAL_IMAGE_NAME):latest \
 		-t $(GLOBAL_IMAGE_NAME):$(VER) \
@@ -49,9 +53,10 @@ build_load_global: builder_recreate
 
 build_push_jump: builder_recreate
 	docker buildx build \
+		--no-cache \
 		-f Dockerfile \
 		-t $(JUMP_IMAGE_NAME):latest \
 		-t $(JUMP_IMAGE_NAME):$(VER) \
 		--push . || true
 
-build_push: build_load_local build_push_local build_push_global build_push_jump
+build_push: build_push_local build_push_global build_push_jump
