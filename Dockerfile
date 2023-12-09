@@ -1,10 +1,11 @@
-FROM --platform=${BUILDPLATFORM} python:3.12-alpine3.18
+FROM --platform=${BUILDPLATFORM} python:3.12-alpine3.19
 
 WORKDIR /workdir
 
+COPY requirements.txt /workdir/
+
 RUN /bin/sh -c set -eux; \
     apk update ;\
-    apk upgrade ; \
     apk add --no-cache --no-progress  \
       git \
       openssh-client \
@@ -17,9 +18,8 @@ RUN /bin/sh -c set -eux; \
       libffi-dev \
       python3-dev \
       ; \
-    pip install --upgrade pip
-COPY requirements.txt /workdir/
-RUN pip install -r ./requirements.txt ;\
+    pip install --upgrade pip ;\
+    pip install -r ./requirements.txt ;\
     ansible-galaxy collection install \
       community.postgresql \
       community.docker \
@@ -27,5 +27,3 @@ RUN pip install -r ./requirements.txt ;\
       community.network  \
       ; \
     apk del .build-dependencies
-
-WORKDIR /workdir

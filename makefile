@@ -2,7 +2,7 @@ include env
 export
 
 GLOBAL_IMAGE_NAME = kirillsilianov/deploy-image
-LOCAL_IMAGE_NAME = harbor.ksilianov.xyz/main/deploy_image
+LOCAL_IMAGE_NAME = cr.yandex/crpggrk8hkkh8deei0id/deploy_image
 JUMP_IMAGE_NAME = gitlab.jump.finance:5050/k.silyanov/deploy_image
 
 BUILDER_NAME = deploy-builder
