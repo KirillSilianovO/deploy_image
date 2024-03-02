@@ -60,3 +60,5 @@ build_push_jump: builder_recreate
 		--push . || true
 
 build_push: build_push_local build_push_global build_push_jump
+
+build_push_personal: build_push_local build_push_global
