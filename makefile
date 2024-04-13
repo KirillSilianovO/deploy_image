@@ -3,7 +3,6 @@ export
 
 GLOBAL_IMAGE_NAME = kirillsilianov/deploy-image
 LOCAL_IMAGE_NAME = cr.yandex/crpggrk8hkkh8deei0id/deploy_image
-JUMP_IMAGE_NAME = gitlab.jump.finance:5050/k.silyanov/deploy_image
 
 BUILDER_NAME = deploy-builder
 
@@ -51,14 +50,4 @@ build_load_global: builder_recreate
 		-t $(GLOBAL_IMAGE_NAME):$(VER) \
 		--load . || true
 
-build_push_jump: builder_recreate
-	docker buildx build \
-		--no-cache \
-		-f Dockerfile \
-		-t $(JUMP_IMAGE_NAME):latest \
-		-t $(JUMP_IMAGE_NAME):$(VER) \
-		--push . || true
-
-build_push: build_push_local build_push_global build_push_jump
-
-build_push_personal: build_push_local build_push_global
+build_push: build_push_local build_push_global
