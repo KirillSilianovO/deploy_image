@@ -21,10 +21,4 @@ RUN /bin/sh -c set -eux; \
       ; \
     pip install --upgrade pip ;\
     pip install -r ./requirements.txt ;\
-    ansible-galaxy collection install \
-      community.postgresql \
-      community.docker \
-      community.mysql \
-      community.network  \
-      ; \
     apk del .build-dependencies
