@@ -1,0 +1,7 @@
+---
+
+version: '3'
+
+vars:
+  IMAGE_NAMESPACE: "kirillsilianov/deploy_image"
+  VERSION: "3.0.0"

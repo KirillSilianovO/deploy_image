@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM} python:3.12-alpine3.19
+FROM --platform=${BUILDPLATFORM} python:3.13-alpine3.19
 
 WORKDIR /workdir
 

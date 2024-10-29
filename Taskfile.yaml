@@ -1,0 +1,26 @@
+---
+
+version: '3'
+
+includes:
+  ext_vars: './variables.yaml'
+  secrets: './.secrets.yaml'
+
+tasks:
+  build_load:
+    label: 'Build image and load to Docker'
+    cmd: "IMAGE_NAMESPACE={{ .IMAGE_NAMESPACE }} VERSION={{ .VERSION }} docker buildx bake load"
+
+  build_push_global:
+    label: 'Build image and push to DockerHub'
+    cmds:
+      - "docker login -u {{ .DOCKERHUB_LOGIN }} -p {{ .DOCKERHUB_PASSWORD }}"
+      - "IMAGE_NAMESPACE={{ .IMAGE_NAMESPACE }} VERSION={{ .VERSION }} docker buildx bake push"
+
+  run:
+    label: 'Run container'
+    cmd: "docker run {{ .IMAGE_NAMESPACE }}:{{ .VERSION }}"
+
+  run_background:
+    label: 'Run container in background'
+    cmd: "docker run -d {{ .IMAGE_NAMESPACE }}:{{ .VERSION }}"
