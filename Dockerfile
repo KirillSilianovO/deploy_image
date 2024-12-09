@@ -11,7 +11,9 @@ RUN /bin/sh -c set -eux; \
       openssh-client \
       rsync \
       sshpass \
-    	helm \
+      helm \
+      curl \
+      wget \
       ; \
     apk add --nocache --no-progress --virtual .build-dependencies \
       gcc \
