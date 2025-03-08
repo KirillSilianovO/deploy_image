@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM} python:3.13-alpine3.19
+FROM --platform=${BUILDPLATFORM} python:3.13-alpine3.21
 
 WORKDIR /workdir
 
@@ -21,6 +21,6 @@ RUN /bin/sh -c set -eux; \
       libffi-dev \
       python3-dev \
       ; \
-    pip install --upgrade pip ;\
+    pip install --upgrade pip setuptools wheel ;\
     pip install -r ./requirements.txt ;\
     apk del .build-dependencies
