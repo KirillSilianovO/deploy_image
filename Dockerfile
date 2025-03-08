@@ -20,6 +20,7 @@ RUN /bin/sh -c set -eux; \
       musl-dev \
       libffi-dev \
       python3-dev \
+      libssh-dev \
       ; \
     pip install --upgrade pip setuptools wheel ;\
     pip install -r ./requirements.txt ;\
