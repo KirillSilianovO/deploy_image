@@ -1,21 +1,20 @@
-FROM --platform=${BUILDPLATFORM} python:3.13-alpine3.21
+FROM --platform=${BUILDPLATFORM} python:3.14-slim-trixie
 
 WORKDIR /workdir
 
 COPY requirements.txt /workdir/
 
-RUN /bin/sh -c set -eux; \
-    apk update ;\
-    apk add --no-cache --no-progress  \
+RUN apt-get update ;\
+    apt-get upgrade -y ;\
+    apt-get dist-upgrade -y ;\
+    apt-get install -y  \
       git \
       openssh-client \
       rsync \
       sshpass \
-      helm \
       curl \
-      wget \
-      ; \
-    apk add --nocache --no-progress --virtual .build-dependencies \
+      wget ; \
+    apt-get install -y \
       gcc \
       musl-dev \
       libffi-dev \
@@ -24,4 +23,11 @@ RUN /bin/sh -c set -eux; \
       ; \
     pip install --upgrade pip setuptools wheel ;\
     pip install -r ./requirements.txt ;\
-    apk del .build-dependencies
+    apt-get remove -y  \
+      gcc  \
+      musl-dev  \
+      python3-dev  \
+      libffi-dev  \
+      ; \
+    apt-get autoremove -y ;\
+    apt-get clean

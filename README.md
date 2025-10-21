@@ -8,7 +8,6 @@ Docker image for deploying the application
 
 - Ansible
 - Git
-- Helm
 - Rsync
 
 ## Build ##

@@ -11,6 +11,10 @@ tasks:
     label: 'Build image and load to Docker'
     cmd: "IMAGE_NAMESPACE={{ .IMAGE_NAMESPACE }} VERSION={{ .VERSION }} docker buildx bake load"
 
+  build_load_nocache:
+    label: 'Build image and load to Docker without cache'
+    cmd: "IMAGE_NAMESPACE={{ .IMAGE_NAMESPACE }} VERSION={{ .VERSION }} docker buildx bake --no-cache load"
+
   build_push_global:
     label: 'Build image and push to DockerHub'
     cmds:
