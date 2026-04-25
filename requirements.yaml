@@ -1,0 +1,17 @@
+---
+
+collections:
+  - name: ansible.netcommon
+  - name: community.docker
+  - name: community.routeros
+  - name: community.crypto
+  - name: community.general
+
+roles:
+  - name: docker
+    src: https://github.com/KirillSilianovO/ansible_role_docker
+    version: "0.0.4"
+
+  - name: traefik
+    src: https://github.com/KirillSilianovO/ansible_role_traefik
+    version: "0.0.4"

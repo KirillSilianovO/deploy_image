@@ -10,6 +10,17 @@ Docker image for deploying the application
 - Git
 - Rsync
 
+### Ansible collections ###
+- ansible.netcommon
+- community.docker
+- community.routeros
+- community.crypto
+- community.general
+
+### Ansible roles ###
+  - [Docker](https://github.com/KirillSilianovO/ansible_role_docker)
+  - [Traefik](https://github.com/KirillSilianovO/ansible_role_traefik)
+
 ## Build ##
 
 ### Dependencies ###
@@ -22,7 +33,7 @@ Docker image for deploying the application
 
 Copy example.secrets.yaml to .secrets.yaml and fill in the values
 
-### Build local image ###
+### Build image and load to local docker###
 
 ```shell
 task build_load

@@ -3,6 +3,7 @@ FROM --platform=${BUILDPLATFORM} python:3.14-slim-trixie
 WORKDIR /workdir
 
 COPY requirements.txt /workdir/
+COPY requirements.yaml /workdir/
 
 RUN apt-get update ;\
     apt-get upgrade -y ;\
@@ -30,4 +31,5 @@ RUN apt-get update ;\
       libffi-dev  \
       ; \
     apt-get autoremove -y ;\
-    apt-get clean
+    apt-get clean ;\
+    ansible-galaxy install -r requirements.yaml --force
