@@ -5,3 +5,4 @@ molecule==26.4.0
 ansible-core==2.20.5
 passlib==1.7.4
 ansible-pylibssh==1.4.0
+pexpect==4.9.0
